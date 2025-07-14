@@ -1,0 +1,29 @@
+{
+  "name": "challenge2-meu",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TeddyToT/Challenge2-MeU.git"
+  },
+  "keywords": [
+    "nodejs",
+    "expressjs",
+    "MeU"
+  ],
+  "author": "Tuan Minh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TeddyToT/Challenge2-MeU/issues"
+  },
+  "homepage": "https://github.com/TeddyToT/Challenge2-MeU#readme",
+  "dependencies": {
+    "dotenv": "^17.2.0",
+    "express": "^5.1.0",
+    "pg": "^8.16.3"
+  }
+}
