@@ -19,6 +19,7 @@ class ProductController {
     }
 
     getProductById = async (req, res, next) => {
+
         try {
             return res.status(201).json(await ProductService.getProductById(req))
         } catch (error) {
@@ -35,7 +36,6 @@ class ProductController {
 
 
     updateProduct = async (req, res, next) => {
-        console.log(`Incoming: ${req.method} ${req.url}`);
         try {
             return res.status(201).json(await ProductService.updateProduct(req.params.id, req.body))
         } catch (error) {
