@@ -1,5 +1,6 @@
 const ProductService = require('../database/productService')
 
+
 class ProductController {
 
     addProduct = async (req, res,next) => {

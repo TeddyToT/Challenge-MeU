@@ -7,11 +7,11 @@ const database = process.env.PG_DATABASE;
 
 
 const pool = new Pool({
-    host: host||'db',
+    host: host||'localhost',
     port: port||5432,
-    user: user||'user1',
-    password: password||'password123',
-    database: database||'db123'
+    user: user||'postgres',
+    password: password||'abc123',
+    database: database||'testdb'
 })
 
 pool

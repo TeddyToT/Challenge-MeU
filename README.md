@@ -6,7 +6,8 @@ Ensure you have installed:
 
 - [Node.js](https://nodejs.org/)
 - [npm](https://www.npmjs.com/)
-- A running instance of MongoDB (local or cloud like MongoDB Atlas)
+- [PostgreSQL](https://www.postgresql.org/)
+- A running database in PostgreSQL server, use the product.sql in ./src/database
 
 ---
 
@@ -22,24 +23,17 @@ npm install
 Create a `.env` file in the root of your directory with the following variables:
 
 ```env
-MONGO_URI=
+PG_HOST=
+PG_PORT=
+PG_USER=
+PG_PASSWORD=
+PG_DATABASE=
 
 ```
 
 ##  Running the Server
-- npm start: Run the backend server.
+- npm start: Run the server.
 
 
-## Project Structure
-Challenge2-MeU
-├── src/
-│   ├── app.js
-│   ├── controllers/
-│   ├── database/
-│   ├── models/
-│   ├── router/
-├── .env
-├── index.js
-└── package.json
 
 
