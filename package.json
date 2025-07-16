@@ -1,5 +1,5 @@
 {
-  "name": "challenge2-meu",
+  "name": "challenge-meu",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TeddyToT/Challenge2-MeU.git"
+    "url": "git+https://github.com/TeddyToT/Challenge-MeU.git"
   },
   "keywords": [
     "nodejs",
@@ -19,9 +19,9 @@
   "author": "Tuan Minh",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/TeddyToT/Challenge2-MeU/issues"
+    "url": "https://github.com/TeddyToT/Challenge-MeU/issues"
   },
-  "homepage": "https://github.com/TeddyToT/Challenge2-MeU#readme",
+  "homepage": "https://github.com/TeddyToT/Challenge-MeU#readme",
   "dependencies": {
     "dotenv": "^17.2.0",
     "express": "^5.1.0",
