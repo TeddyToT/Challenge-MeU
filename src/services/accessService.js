@@ -16,9 +16,8 @@ const validateEmail = (email) => {
 };
 
 function isValidPhone(number) {
-  const regexPhoneNumber = /(84|0[3|5|7|8|9])+([0-9]{8})\b/g;
-
-  return number.match(regexPhoneNumber);
+  const regexPhoneNumber = /^(84|0[3|5|7|8|9])[0-9]{8}$/;
+  return regexPhoneNumber.test(number);
 }
 
 class AccessService {
@@ -28,15 +27,16 @@ class AccessService {
       if (checkEmail === null) {
         return {
           success: false,
-          message: "Disposable or Invalid email is not allowed",
+          message: "Disposable or Invalid email",
         };
       }
+
       const checkPhone = isValidPhone(phone);
 
-      if (checkPhone === false) {
+      if (!checkPhone) {
         return {
           success: false,
-          message: "Invalid Vietnamese phone number is not allowed",
+          message: "Invalid Vietnamese phone number",
         };
       }
 

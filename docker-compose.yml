@@ -28,12 +28,6 @@ services:
       - .env.docker
     ports:
       - "8000:8000"
-    environment:
-      - DB_HOST=host.docker.internal
-      - DB_PORT=5432
-      - DB_USER=postgres
-      - DB_PASSWORD=abc123
-      - DB_DATABASE=mydb
     depends_on:
       db:
         condition: service_healthy
