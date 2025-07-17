@@ -1,5 +1,5 @@
 const { Pool } = require('pg')
-const host = process.env.PG_HOST||'db';
+const host = process.env.PG_HOST||'localhost';
 const port = process.env.PG_PORT || 5432;
 const user = process.env.PG_USER || 'postgres';
 const password = process.env.PG_PASSWORD || 'abc123';
@@ -20,10 +20,22 @@ const pool = new Pool({
 
 })
 
+
 pool
   .connect()
-  .then(() => {
+  .then((client) => {
     console.log("Connected to PostgreSQL database");
+    return client
+      .query('SELECT NOW()')
+      .then((res) => {
+        console.log("Current time:", res.rows[0]);
+      })
+      .catch((err) => {
+        console.error("Query error", err);
+      })
+      .finally(() => {
+        client.release();
+      });
   })
   .catch((err) => {
     console.error("Error connecting to PostgreSQL database", err);

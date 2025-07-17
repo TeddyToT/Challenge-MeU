@@ -2,7 +2,7 @@ const pool = require('../database/pg')
 
 class ProductModel {
   static async findById(id) {
-    const result = await pool.query('SELECT * FROM product WHERE id = $1', [id]);
+    const result = await pool.query('SELECT * FROM product WHERE pid = $1', [id]);
     return result.rows[0];
     
   }
@@ -14,7 +14,7 @@ class ProductModel {
 
  static async create({ name, slug, quantity }) {
     const result = await pool.query(
-      `INSERT INTO product (id, name, slug, quantity)
+      `INSERT INTO product (pid, name, slug, quantity)
        VALUES (gen_random_uuid(), $1, $2, $3)
        RETURNING *`,
       [name, slug, quantity]
@@ -23,7 +23,7 @@ class ProductModel {
   }
 
   static async delete(id) {
-    const result = await pool.query('DELETE FROM product WHERE id = $1', [id]);
+    const result = await pool.query('DELETE FROM product WHERE pid = $1', [id]);
     return result.rowCount;
   }
     static async findAll() {
@@ -43,7 +43,7 @@ class ProductModel {
 
     if (slug) {
       const slugCheck = await pool.query(
-        'SELECT * FROM product WHERE slug = $1 AND id != $2',
+        'SELECT * FROM product WHERE slug = $1 AND pid != $2',
         [slug, id]
       );
       if (slugCheck.rows.length > 0) 
@@ -62,7 +62,7 @@ class ProductModel {
 
     values.push(id); // push id last
     const result = await pool.query(
-      `UPDATE product SET ${fields.join(', ')} WHERE id = $${i} RETURNING *`,
+      `UPDATE product SET ${fields.join(', ')} WHERE pid = $${i} RETURNING *`,
       values
     );
     return {sucess: true, data: result.rows[0]}

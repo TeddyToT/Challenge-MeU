@@ -7,6 +7,7 @@ require('dotenv').config()
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 
+
 require('./database/pg')
 // require('./database/mongo')
 app.use('/', require('./router'))

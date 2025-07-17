@@ -10,6 +10,18 @@ CREATE TABLE IF NOT EXISTS PRODUCT
     CONSTRAINT product_unique UNIQUE (id, slug)
 );
 
+CREATE TABLE IF NOT EXISTS USERS
+(
+    uid uuid NOT NULL DEFAULT gen_random_uuid(),
+    name VARCHAR(100) DEFAULT 'user',
+    email VARCHAR(100) NOT NULL,
+	phone VARCHAR(100) NOT NULL,
+	password VARCHAR(100) NOT NULL,
+    created_at timestamp without time zone NOT NULL DEFAULT now(),
+    updated_at timestamp without time zone NOT NULL DEFAULT now(),
+    CONSTRAINT pkey_user PRIMARY KEY ( uid )
+);
+
 CREATE OR REPLACE FUNCTION trigger_set_timestamp()
 RETURNS TRIGGER AS $$
 BEGIN
@@ -18,8 +30,13 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE TRIGGER set_timestamp
+CREATE TRIGGER set_timestamp_product
 BEFORE UPDATE ON PRODUCT
+FOR EACH ROW
+EXECUTE PROCEDURE trigger_set_timestamp();
+
+CREATE TRIGGER set_timestamp_product
+BEFORE UPDATE ON USERS
 FOR EACH ROW
 EXECUTE PROCEDURE trigger_set_timestamp();
 

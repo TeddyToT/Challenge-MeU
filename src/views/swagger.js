@@ -9,13 +9,14 @@ const options = {
       version: '1.0.0',
       description: 'API for managing products with PostgreSQL',
     },
+    
     servers: [
       {
         url: 'http://localhost:8000/api',
       },
     ],
   },
-  apis: [path.join(__dirname, '..', 'router', 'product', '*.js')],
+  apis: [path.join(__dirname, '..', 'router', 'api', '*.js')],
 };
 
 const swaggerSpec = swaggerJsdoc(options);
