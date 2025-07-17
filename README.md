@@ -43,11 +43,17 @@ npm install
 Create a `.env` file in the root of your directory with the following variables:
 
 ```env
-PG_HOST=
+PG_HOST=                    # "db" for docker - "localhost" for dev environment
 PG_PORT=
 PG_USER=
 PG_PASSWORD=
 PG_DATABASE=
+
+ACCESS_TOKEN_SECRET=        # JWT access token
+REFRESH_TOKEN_SECRET=
+
+NODE_EMAIL=                 # nodemailer email
+NODE_EMAIL_PASS=            # password for nodemailer email
 
 ```
 ### Running the Server
