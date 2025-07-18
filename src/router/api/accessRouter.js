@@ -2,15 +2,15 @@ const express = require("express")
 const router = express.Router()
 const UserController = require('../../controllers/usersController')
 
-router.post('/users/sign-up', UserController.signUp)
-router.post('/users/log-in', UserController.logIn)
+router.post('/sign-up', UserController.signUp)
+router.post('/log-in', UserController.logIn)
 
 /**
  * @swagger
  * tags:
  *   name: Users
  *   description: Users management
- * /users/sign-up:
+ * /sign-up:
  *   post:
  *     summary: Sign Up
  *     tags: [Users]
@@ -35,7 +35,7 @@ router.post('/users/log-in', UserController.logIn)
  */
 /**
  * @swagger
- * /users/log-in:
+ * /log-in:
  *   post:
  *     summary: Log In
  *     tags: [Users]

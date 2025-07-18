@@ -2,12 +2,12 @@ const express = require("express")
 const router = express.Router()
 const ProductController = require('../../controllers/productController')
 
-router.get('/product', ProductController.getAllProduct)
-router.post('/product', ProductController.addProduct)
-router.get('/product/:id', ProductController.getProductById)
-router.get('/product/slug/:slug', ProductController.getProductBySlug)
-router.put('/product/:id', ProductController.updateProduct)
-router.delete('/product/:id', ProductController.deleteProduct)
+router.get('/', ProductController.getAllProduct)
+router.post('/', ProductController.addProduct)
+router.get('/:id', ProductController.getProductById)
+router.get('/slug/:slug', ProductController.getProductBySlug)
+router.put('/:id', ProductController.updateProduct)
+router.delete('/:id', ProductController.deleteProduct)
 
 /**
  * @swagger
@@ -28,6 +28,8 @@ router.delete('/product/:id', ProductController.deleteProduct)
  *   post:
  *     summary: Create new product
  *     tags: [Product]
+ *     security:
+ *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -52,6 +54,8 @@ router.delete('/product/:id', ProductController.deleteProduct)
  *   get:
  *     summary: Get product by ID
  *     tags: [Product]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -69,6 +73,8 @@ router.delete('/product/:id', ProductController.deleteProduct)
  *   put:
  *     summary: Update product
  *     tags: [Product]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -99,6 +105,8 @@ router.delete('/product/:id', ProductController.deleteProduct)
  *   delete:
  *     summary: Delete product
  *     tags: [Product]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id

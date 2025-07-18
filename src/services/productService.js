@@ -36,7 +36,7 @@ class ProductService {
       if (!product)
         return { success: false, message: "Product is not found" };
 
-      return product;
+      return {product: product, header: req.originalUrl};
     } catch (error) {
       return {
         success: false,
