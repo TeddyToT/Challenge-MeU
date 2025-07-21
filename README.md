@@ -7,6 +7,24 @@ Ensure you have installed:
 - [Docker desktop](https://www.docker.com/products/docker-desktop//) for Windows
 - [Linux or Ubuntu](https://docs.docker.com/engine/install/ubuntu/)
 
+### Environment Configuration
+Create a `.env.docker` file in the root of your directory with the following variables:
+
+```env
+PG_HOST=                    # "db" for docker - "localhost" for dev environment
+PG_PORT=
+PG_USER=
+PG_PASSWORD=
+PG_DATABASE=
+
+ACCESS_TOKEN_SECRET=        # JWT access token
+REFRESH_TOKEN_SECRET=
+
+NODE_EMAIL=                 # nodemailer email
+NODE_EMAIL_PASS=            # password for nodemailer email
+
+```
+
 ### Build and run the app container
 ```bash
 docker-compose up --build
