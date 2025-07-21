@@ -18,7 +18,6 @@ PG_PASSWORD=
 PG_DATABASE=
 
 ACCESS_TOKEN_SECRET=        # JWT access token
-REFRESH_TOKEN_SECRET=
 
 NODE_EMAIL=                 # nodemailer email
 NODE_EMAIL_PASS=            # password for nodemailer email
@@ -68,7 +67,6 @@ PG_PASSWORD=
 PG_DATABASE=
 
 ACCESS_TOKEN_SECRET=        # JWT access token
-REFRESH_TOKEN_SECRET=
 
 NODE_EMAIL=                 # nodemailer email
 NODE_EMAIL_PASS=            # password for nodemailer email
