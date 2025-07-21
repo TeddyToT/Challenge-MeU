@@ -1,13 +1,16 @@
 const express = require("express")
-const router = express.Router()
 const ProductController = require('../../controllers/productController')
+const validate = require('../../middlewares/validate')
+const {createProductDTO, updateProductDTO, findProductByIdDTO, findProductBySlugDTO} = require('../../dtos/product.dto')
+
+const router = express.Router()
 
 router.get('/', ProductController.getAllProduct)
-router.post('/', ProductController.addProduct)
-router.get('/:id', ProductController.getProductById)
-router.get('/slug/:slug', ProductController.getProductBySlug)
-router.put('/:id', ProductController.updateProduct)
-router.delete('/:id', ProductController.deleteProduct)
+router.post('/', createProductDTO,validate, ProductController.addProduct)
+router.get('/:id', findProductByIdDTO, validate, ProductController.getProductById)
+router.get('/slug/:slug', findProductBySlugDTO, validate, ProductController.getProductBySlug)
+router.put('/:id', updateProductDTO, validate, ProductController.updateProduct)
+router.delete('/:id', findProductByIdDTO, validate, ProductController.deleteProduct)
 
 /**
  * @swagger

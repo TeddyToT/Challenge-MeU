@@ -1,9 +1,10 @@
 const express = require("express")
 const router = express.Router()
 const UserController = require('../../controllers/usersController')
-
-router.post('/sign-up', UserController.signUp)
-router.post('/log-in', UserController.logIn)
+const validate = require('../../middlewares/validate')
+const {createUserDTO, accessDTO} = require('../../dtos/user.dto')
+router.post('/sign-up', createUserDTO, validate, UserController.signUp)
+router.post('/log-in', accessDTO, validate, UserController.logIn)
 
 /**
  * @swagger

@@ -3,12 +3,14 @@ const bcrypt = require("bcrypt");
 
 class UserModel {
   static async findById(id) {
-    const result = await pool.query("SELECT * FROM user WHERE uid = $1", [id]);
+    const result = await pool.query("SELECT * FROM users WHERE uid = $1", [id]);
     return result.rows[0];
   }
 
     static async findByEmail(email) {
+      console.log(email);
     const result = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
+    console.log(result.rows[0]);
     return result.rows[0];
   }
 

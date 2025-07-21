@@ -1,20 +1,20 @@
-const swaggerJsdoc = require('swagger-jsdoc');
-const swaggerUi = require('swagger-ui-express');
-const path = require('path');
+const swaggerJsdoc = require("swagger-jsdoc");
+const swaggerUi = require("swagger-ui-express");
+const path = require("path");
 const options = {
   definition: {
-    openapi: '3.0.0',
+    openapi: "3.0.0",
     info: {
-      title: 'Challenge MeU - API',
-      version: '1.0.0',
-      description: 'API for managing Node.js Challenge Project with JWT',
+      title: "Challenge MeU - API",
+      version: "1.0.0",
+      description: "API for managing Node.js Challenge Project with JWT",
     },
-        components: {
+    components: {
       securitySchemes: {
         bearerAuth: {
-          type: 'http',
-          scheme: 'bearer',
-          bearerFormat: 'JWT',
+          type: "http",
+          scheme: "bearer",
+          bearerFormat: "JWT",
         },
       },
     },
@@ -25,11 +25,11 @@ const options = {
     ],
     servers: [
       {
-        url: 'http://localhost:8000/api',
+        url: "http://localhost:8000/api",
       },
     ],
   },
-  apis: [path.join(__dirname, '..', 'router', 'api', '*.js')],
+  apis: [path.join(__dirname, "..", "router", "api", "*.js")],
 };
 
 const swaggerSpec = swaggerJsdoc(options);

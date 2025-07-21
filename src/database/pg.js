@@ -6,7 +6,7 @@ const password = process.env.PG_PASSWORD || 'abc123';
 const database = process.env.PG_DATABASE || 'mydb';
 
 const connectionString = 'postgresql://' + user + ':' + password + '@' + host + ':' + port + '/' + database
-console.log("connect string: ", connectionString);
+// console.log("connect string: ", connectionString);
 
 
 const pool = new Pool({

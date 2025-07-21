@@ -6,56 +6,24 @@ const bcrypt = require("bcrypt");
 const nodeMail = process.env.NODE_EMAIL;
 const nodeMailPassword = process.env.NODE_EMAIL_PASS;
 
-const MIN_PASSWORD_LENGTH = 6;
-const validateEmail = (email) => {
-  return String(email)
-    .toLowerCase()
-    .match(
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    );
-};
 
-function isValidPhone(number) {
-  const regexPhoneNumber = /^(84|0[3|5|7|8|9])[0-9]{8}$/;
-  return regexPhoneNumber.test(number);
-}
 
 class AccessService {
-  static signUp = async ({ name, email, phone, password } = {}) => {
-    try {
-      const checkEmail = validateEmail(email);
-      if (checkEmail === null) {
-        return {
-          success: false,
-          message: "Disposable or Invalid email",
-        };
-      }
+  static signUp = async ({ name, email, phone, password }) => {
 
-      const checkPhone = isValidPhone(phone);
-
-      if (!checkPhone) {
-        return {
-          success: false,
-          message: "Invalid Vietnamese phone number",
-        };
-      }
 
       const existEmail = await UserModel.findNotDuplicate({ email });
       if (existEmail.success === false) {
-        console.log(existEmail);
-        return existEmail;
+        // throw new Error("Email already in use")
+        return {success: false, message: "Email already in use"}
+
+
       }
 
       const existPhone = await UserModel.findNotDuplicate({ phone });
       if (existPhone.success === false) {
-        return existPhone;
-      }
+        return {success: false, message: "Phone already in use"}
 
-      if (password.length < MIN_PASSWORD_LENGTH) {
-        return {
-          success: false,
-          message: `Password must be at least ${MIN_PASSWORD_LENGTH} characters long`,
-        };
       }
 
       const newUser = await UserModel.create({ name, email, phone, password });
@@ -100,7 +68,7 @@ class AccessService {
 
         transporter.sendMail(mailoptions, function (error, info) {
           if (error) {
-            console.log(error);
+            console.log("Couldn't send mail, error: ",error);
           } else {
             console.log("Email sent: " + info.response);
           }
@@ -108,68 +76,32 @@ class AccessService {
       }
       return {
         success: true,
-        // user: newUser,
       };
-    } catch (error) {
-      if (error.name === "ValidationError") {
-        const errors = Object.values(error.errors).map((key) => ({
-          field: key.path,
-          message: key.message,
-        }));
 
-        return {
-          success: false,
-          type: "Validation Error",
-          errors: errors,
-        };
-      }
-
-      return {
-        success: false,
-        message: "Internal Server Error",
-        error: error.message,
-      };
-    }
   };
 
   static logIn = async ({ email, password }) => {
-    try {
-      const checkMailValid = validateEmail(email);
-      if (checkMailValid === null) {
-        return {
-          success: false,
-          message: "Disposable or Invalid email",
-        };
-      }
+
 
       const existUser = await UserModel.findByEmail(email);
-
+      // console.log(existUser);
       if (existUser?.email === undefined) {
-        return {
-          success: false,
-          message: "This email is not registered",
-        };
+        return {success: false, message: "This email is not registered"}
       }
 
       const match = await bcrypt.compare(password, existUser.password);
       if (!match) {
-        return {
-          success: false,
-          message: "Wrong Password",
-        };
+        return {success: false, message: "Wrong password"}
       }
 
-      const payload = { uid: existUser.uid, email };
+      const payload = { uid: existUser.uid, email, name: existUser.name };
       const accessToken = await AuthService.createAccessToken(payload);
 
       return {
         success: true,
-        user: existUser,
+        user: {uid:existUser.uid, email:existUser.email, name: existUser.name} ,
         accessToken: accessToken,
       };
-    } catch (error) {
-      return { success: false, message: "hello world" };
-    }
   };
 }
 

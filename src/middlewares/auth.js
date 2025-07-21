@@ -9,11 +9,12 @@ const auth = (req, res, next) => {
       const token = req.headers.authorization.split(" ")[1];
       try {
         const decodeJWT = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
-        console.log("decode: ", decodeJWT);
+        // console.log("decode: ", decodeJWT);
         req.user = {
           email: decodeJWT.email,
           name: decodeJWT.name,
         };
+        console.log(req.user);
 
         next();
       } catch (error) {

@@ -47,7 +47,7 @@ class ProductModel {
         [slug, id]
       );
       if (slugCheck.rows.length > 0) 
-        return {sucess: false, message: "This slug is already exists in another product"}
+        return {success: false, message: "This slug is already exists in another product"}
 
       fields.push(`slug = $${i++}`);
       values.push(slug);
@@ -65,7 +65,7 @@ class ProductModel {
       `UPDATE product SET ${fields.join(', ')} WHERE pid = $${i} RETURNING *`,
       values
     );
-    return {sucess: true, data: result.rows[0]}
+    return {success: true, data: result.rows[0]}
   }
 };
 
